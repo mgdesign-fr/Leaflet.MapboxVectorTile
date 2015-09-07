@@ -207,9 +207,17 @@ module.exports = L.TileLayer.MVTSource = L.TileLayer.Canvas.extend({
     xhr.onload = function() {
       if (xhr.status == "200") {
 
-        if(!xhr.response) return;
+         // emulating response field for IE9
+        if (typeof xhr.responseBody != "undefined") {
+          res = xhr.responseBody.toArray();
+        }else{
+          res = xhr.response;
+        }
+        
+        if(!res) return;
 
-        var arrayBuffer = new Uint8Array(xhr.response);
+        var arrayBuffer = new Uint8Array(res);
+
         var buf = new Protobuf(arrayBuffer);
         var vt = new VectorTile(buf);
         //Check the current map layer zoom.  If fast zooming is occurring, then short circuit tiles that are for a different zoom level than we're currently on.
