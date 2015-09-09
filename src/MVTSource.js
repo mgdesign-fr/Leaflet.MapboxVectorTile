@@ -208,7 +208,7 @@ module.exports = L.TileLayer.MVTSource = L.TileLayer.Canvas.extend({
       if (xhr.status == "200") {
 
          // emulating response field for IE9
-        if (typeof xhr.responseBody != "undefined") {
+        if (typeof xhr.response == "undefined") {
           res = xhr.responseBody.toArray();
         }else{
           res = xhr.response;
