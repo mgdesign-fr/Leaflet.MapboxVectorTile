@@ -53,7 +53,8 @@
     "serve": "browser-sync start --reload-delay=1000 --server --files **/*",
     "watch": "watchify -v -d src/index.js -o dist/Leaflet.MapboxVectorTile.js",
     "build": "browserify -d src/index.js -o dist/Leaflet.MapboxVectorTile.js",
-    "production": "browserify -d src/index.js | uglifyjs -m -c --comments > dist/Leaflet.MapboxVectorTile.min.js",
+    "buildmin": "browserify -d src/index.js | uglifyjs -m -c --comments > dist/Leaflet.MapboxVectorTile.min.js",
+    "production": "npm run build | npm run buildmin",
     "test": "testling | faucet"
   }
 }
